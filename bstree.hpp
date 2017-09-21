@@ -59,7 +59,7 @@ template <typename TKey, typename TVal> class BSTree {
 
         iterator begin();
         iterator begin(int);
-        iterator rbegin();
+        iterator rbegin(); // returns a forward iterator at the last element, not a reverse iterator.
         iterator end();
 
     
