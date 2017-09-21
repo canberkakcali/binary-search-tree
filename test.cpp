@@ -5,17 +5,33 @@ int main() {
 
     BSTree<int, const char*> tree;
 
-    tree.insert(5, "bes");
-    tree.insert(2, "iki");
-    tree.insert(3, "uc");
-    tree.insert(7, "yedi");
-    tree.insert(6, "alti");
-    tree.insert(10, "on");
-    tree.insert(1, "bir");
-    tree.insert(0, "sifir");
-    tree.insert(4, "dort");
+    tree.insert(5, "five");
+    tree.insert(2, "two");
+    tree.insert(3, "three");
+    tree.insert(7, "seven");
+    tree.insert(6, "six");
+    tree.insert(10, "ten");
+    tree.insert(1, "one");
+    tree.insert(0, "zero");
+    tree.insert(4, "four");
 
     tree.del(5);
-    tree.print(INORDER);
+    std::cout << "Printing the data in the nodes by preorder traversal:" << std::endl;
+    tree.print(PREORDER);
+
+    std::cout << "Iterating through all nodes from beginning to the end of the tree by inorder traversal:" << std::endl;
+    BSTree<int, const char*>::iterator i = tree.begin();
+    while(i != tree.end()) {
+        std::cout << "[" << (*i).key << ", " << (*i).data << "] ";
+        i++;
+    }
+    std::cout << std::endl << "Iterating through all nodes in reverse order:" << std::endl;
+
+    i = tree.rbegin();
+    while(i != tree.end()) {
+        std::cout << "[" << (*i).key << ", " << (*i).data << "] ";
+        i--;
+    }
+    std::cout << std::endl;
 
 }
