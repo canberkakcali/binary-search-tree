@@ -10,7 +10,15 @@
 *
 */
 
-
+/*
+*   Function: Destructor
+*   
+*   Description: Destroys the tree by freeing all nodes it possesses
+*
+*/
+template <typename TKey, typename TVal> BSTree<TKey, TVal>::~BSTree() {
+    _deleteTree(root);
+}
 
 /*
 *   Function: insert
@@ -92,17 +100,20 @@ template <typename TKey, typename TVal> bool BSTree<TKey, TVal>::del(TKey key) {
         if((*current)->right) {
             (*current)->right->parent = (*current)->parent;
         }
+        BSTree<TKey, TVal>::node* ptrToFree = *current;
         *current = (*current)->left;
+        delete ptrToFree;
         
     }
     // If the right node is empty, move the left node
     // to the current node.
     else if(!(*current)->right) {
-        
         if((*current)->left) {
             (*current)->left->parent = (*current)->parent;
         }
+        BSTree<TKey, TVal>::node* ptrToFree = *current;
         *current = (*current)->left;
+        delete ptrToFree;
     }
     // If the left and the right nodes are both present,
     // find the leftmost (smallest) node in the right subtree
@@ -116,7 +127,9 @@ template <typename TKey, typename TVal> bool BSTree<TKey, TVal>::del(TKey key) {
         (*current)->key = (*temp)->key;
 
         // Delete the copied node.
+        BSTree<TKey, TVal>::node* ptrToFree = *temp;
         *temp = (*temp)->right;
+        delete ptrToFree;
     }
 
     return true;
@@ -360,6 +373,17 @@ template <typename TKey, typename TVal> typename BSTree<TKey, TVal>::node* BSTre
     return newNode;
 }
 
+/*
+*   Destroys the tree with given root by freeing all nodes it possesses recursively
+*/
+
+template <typename TKey, typename TVal> void BSTree<TKey, TVal>::_deleteTree(node* root) {
+    if(root != NULL) {
+        _deleteTree(root->left);
+        _deleteTree(root->right);
+        delete root;
+    }
+}
 
 /*
 *   RECURSIVE PRINTERS

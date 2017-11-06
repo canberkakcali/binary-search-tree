@@ -45,7 +45,7 @@ template <typename TKey, typename TVal> class BSTree {
         };
 
         BSTree() {};
-        ~BSTree() {};
+        ~BSTree();
 
         void insert(TKey, TVal);
         bool del(TKey);
@@ -70,6 +70,7 @@ template <typename TKey, typename TVal> class BSTree {
 
         node* _insert(node*, TKey, TVal);
         node* _newNode(TKey, TVal);
+        void _deleteTree(node* root);
         void _printInOrder(node*);
         void _printPreOrder(node*);
         void _printPostOrder(node*);
